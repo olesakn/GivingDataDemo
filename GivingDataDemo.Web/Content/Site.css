@@ -1,0 +1,25 @@
+﻿body {
+    padding-bottom: 20px;
+    background-color: #e7e7e7;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+table > tbody > tr:hover {
+    cursor: pointer;
+}
+
+
+/* Review Stars */
+.fas.fa-star {
+    color: orange;
+}
+
+.far.fa-star {
+    color: gray;
+}

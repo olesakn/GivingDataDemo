@@ -1,0 +1,46 @@
+﻿
+<div>
+    <div class="form-inline">
+        <div class="form-group mx-2 mr-5">
+            <label for="keywords" class="form-label mr-2">Search  </label>
+            <input type="text" name="keywords" ng-model="keywords" class="form-control form-control-sm" placeholder="Enter search keywords" />
+        </div>
+        <div class="form-group mx-2 mr-5">
+            <label for="keywords" class="form-label mr-2">Number of Results  </label>
+            <select ng-model="numberOfResults"
+                    ng-options="option for option in numberOfResultsOptions"
+                    class="form-control form-control-sm"></select>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" ng-click="getBooks()">Search</button>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12 animate-show animate-hide" ng-show="isLoading">
+            <div class="my-5 py-5 text-center">
+                <i class="fas fa-2x fa-circle-notch fa-spin text-primary"></i>
+                <p class="lead">Loading</p>
+            </div>
+        </div>
+        <div class="col-12 animate-show animate-hide" ng-show="!isLoading">
+            <h4>Books</h4>
+            <table class="table table-striped table-hover mt-3">
+                <thead>
+                    <tr class="d-flex">
+                        <th class="col-5">Title</th>
+                        <th class="col-2">Year Published</th>
+                        <th class="col-5">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="d-flex" ng-repeat="book in books" ng-click="viewBookDetails(book)">
+                        <td class="col-5">{{ book.Title }}</td>
+                        <td class="col-2">{{ book.PublishedYear }}</td>
+                        <td class="col-5">{{ book.Description | limitTo: 250 }}{{book.Description.length > 250 ? '...' : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-right mt-4">
+                <small>Showing {{books.length}} results</small>
+            </div>
+        </div>
+    </div>
+</div>

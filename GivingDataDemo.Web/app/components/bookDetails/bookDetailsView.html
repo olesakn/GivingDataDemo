@@ -1,0 +1,143 @@
+﻿
+<div ng-hide="isBusy">
+    <div class="row">
+        <div class="col-12">
+            <a href="/" class="btn btn-link btn-sm"><i class="fas fa-angle-left"></i> Book Search</a>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4 mt-3">
+            <img src="{{book.ThumbnailImageUrl}}" class="img-fluid" />
+            <div class="row mt-5 mb-3">
+                <div class="col-md-12 text-center">
+                    <a href="{{book.GoogleProductUrl}}" class="btn btn-outline-secondary btn-sm" target="_blank">View on Google Play</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-12">
+                    <h4>
+                        {{book.Title}}
+                    </h4>
+                    <p class="lead">
+                        by  <span ng-repeat="author in book.Authors">{{author}}{{$last ? '' : ', '}}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" ng-bind-html="book.Description"></div>
+            </div>
+            <hr class="my-3" ng-show="book.Description.length" />
+            <div class="row">
+                <div class="col-12">
+                    <div class="row mb-2">
+                        <div class="col-sm-3 col-6">Publisher</div>
+                        <div class="col-sm-9 col-6">{{book.Publisher || "Not available"}}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-3 col-6">Year</div>
+                        <div class="col-sm-9 col-6">{{book.PublishedYear || "Not available"}}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-3 col-6">Pages</div>
+                        <div class="col-sm-9 col-6">{{book.PageCount || "Not available"}}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-3 col-6">Categories</div>
+                        <div class="col-sm-9 col-6">
+                            <div ng-repeat="category in book.Categories">
+                                <span class="badge badge-secondary m-1">{{category}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <section>
+        <div class="row mt-4">
+            <div class="col-12">
+                <h4>Reviews</h4>
+            </div>
+        </div>
+        <div class="row py-5 border-bottom" ng-hide="bookReviews.length > 0">
+            <div class="col-12">
+                No reviews have been left yet...
+            </div>
+        </div>
+        <div class="row mt-3 border-bottom" ng-repeat="bookReview in bookReviews">
+            <div class="col-12 py-2">
+                <!-- Was trying to use a directive but couldn't get it to work. I'll look at this later... -->
+                <!--<div book-review review="bookReview"></div>-->
+                <div class="row pt-1">
+                    <div class="col-md-2">
+                        <span><i ng-class="{true: 'fas', false: 'far'}[bookReview.Rating >= 1]" class="fa-star"></i></span>
+                        <span><i ng-class="{true: 'fas', false: 'far'}[bookReview.Rating >= 2]" class="fa-star"></i></span>
+                        <span><i ng-class="{true: 'fas', false: 'far'}[bookReview.Rating >= 3]" class="fa-star"></i></span>
+                        <span><i ng-class="{true: 'fas', false: 'far'}[bookReview.Rating >= 4]" class="fa-star"></i></span>
+                        <span><i ng-class="{true: 'fas', false: 'far'}[bookReview.Rating >= 5]" class="fa-star"></i></span>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h5>{{bookReview.ReviewerName}}</h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <span class="float-right text-muted">{{bookReview.CreatedDate | date:'mediumDate' }}</span>
+                            </div>
+                            <div class="col-12">
+                                <p>{{bookReview.ReviewText}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section>
+        <div class="row mt-4">
+            <div class="col-12">
+                <h4>Leave a Review</h4>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12 py-2">
+                <!-- Was trying to use a directive but couldn't get it to work. I'll look at this later... -->
+                <!--<div book-review review="bookReview"></div>-->
+                <form name="newBookReviewForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-2 mb-2">
+                            <span ng-click="setNewBookReviewRating(1)"><i ng-class="{true: 'fas', false: 'far'}[newBookReview.Rating >= 1]" class="fa-star"></i></span>
+                            <span ng-click="setNewBookReviewRating(2)"><i ng-class="{true: 'fas', false: 'far'}[newBookReview.Rating >= 2]" class="fa-star"></i></span>
+                            <span ng-click="setNewBookReviewRating(3)"><i ng-class="{true: 'fas', false: 'far'}[newBookReview.Rating >= 3]" class="fa-star"></i></span>
+                            <span ng-click="setNewBookReviewRating(4)"><i ng-class="{true: 'fas', false: 'far'}[newBookReview.Rating >= 4]" class="fa-star"></i></span>
+                            <span ng-click="setNewBookReviewRating(5)"><i ng-class="{true: 'fas', false: 'far'}[newBookReview.Rating >= 5]" class="fa-star"></i></span>
+                        </div>
+                        <div class="col-md-10 mb-2">
+                            <input type="text" ng-model="newBookReview.ReviewerName" class="form-control mb-3" placeholder="Your Name" required />
+                            <textarea type="text" rows="4" ng-model="newBookReview.ReviewText" class="form-control mb-2" placeholder="Leave a review" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <button type="button" class="btn btn-primary btn-sm"
+                                    ng-click="addBookReview()"
+                                    ng-disabled="!(newBookReview.Rating > 0) || newBookReviewForm.$invalid">
+                                Save Review
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

@@ -3,7 +3,7 @@
 app.config(function ($routeProvider, $locationProvider) {
 
     $routeProvider
-        .when("/books", {
+        .when("/books/:keywords?/:numberOfResults?", {
             controller: "BooksController",
             templateUrl: "/app/components/books/booksView.html"
         })

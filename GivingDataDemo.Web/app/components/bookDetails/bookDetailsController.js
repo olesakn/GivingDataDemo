@@ -9,6 +9,7 @@ app.controller('BookDetailsController', function($scope, $routeParams, BookServi
 
     $scope.addBookReview = addBookReview;
     $scope.setNewBookReviewRating = setNewBookReviewRating;
+    $scope.returnToPreviousPage = returnToPreviousPage;
 
     construct();
     function construct() {
@@ -35,6 +36,9 @@ app.controller('BookDetailsController', function($scope, $routeParams, BookServi
             $scope.bookReviews.push(response.data);     // add the new review to the list
             $scope.newBookReview = {};                  // clear out the form
         });
+    }
+    function returnToPreviousPage() {
+        window.history.back();
     }
 });
 

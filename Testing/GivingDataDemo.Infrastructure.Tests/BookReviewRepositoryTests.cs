@@ -18,16 +18,6 @@ namespace GivingDataDemo.Infrastructure.Tests
         }
 
         [Fact]
-        public async void GetBookReviews_ReturnsBookReviews()
-        {
-            var booksReviews = await _bookRepo.GetBookReviewsAsync("fakeid");
-
-            Assert.NotNull(booksReviews);
-            Assert.True(booksReviews.Count() > 0);
-        }
-
-
-        [Fact]
         public async void AddBookReview_ReturnsNewBookReviewWithId()
         {
             var bookReview = new BookReview()
@@ -79,6 +69,16 @@ namespace GivingDataDemo.Infrastructure.Tests
             Assert.NotNull(newBookReview);
             Assert.Equal(newBookReviewFromDb.BookReviewId, newBookReview.BookReviewId);
         }
+
+        [Fact]
+        public async void GetBookReviews_ReturnsBookReviews()
+        {
+            var booksReviews = await _bookRepo.GetBookReviewsAsync("fakeid");
+
+            Assert.NotNull(booksReviews);
+            Assert.True(booksReviews.Count() > 0);
+        }
+
 
     }
 }

@@ -61,10 +61,33 @@ namespace GivingDataDemo.Core.Tests
         }
 
         [Fact]
-        public async void GetBooks_PopulatesExpectedFields_ReturnsEmpty()
+        public async void GetBooks_PopulatesExpectedFields_ReturnsBooksWithExpectedFields()
         {
-
+            var result = await _bookService.GetBooksByKeywordsAsync("national parks", 10);
+            Assert.True(result?.Any());
+            Assert.NotNull(result.First().Id);
+            Assert.NotNull(result.First().Title);
+            Assert.NotNull(result.First().Description);
+            Assert.NotNull(result.First().PublishedYear);
         }
 
+
+        [Fact]
+        public async void GetBook_PopulatesExpectedFields_ReturnsBookWithExpectedFields()
+        {
+            var result = await _bookService.GetByIdAsync("EbmxDQAAQBAJ");
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.Id);
+            Assert.NotNull(result.Title);
+            Assert.NotNull(result.Description);
+            Assert.NotNull(result.PublishedYear);
+            Assert.NotNull(result.Publisher);
+            Assert.NotNull(result.Authors);
+            Assert.NotNull(result.PageCount);
+            Assert.NotNull(result.Categories);
+            Assert.NotNull(result.GoogleProductUrl);
+            Assert.NotNull(result.ThumbnailImageUrl);
+        }
     }
 }

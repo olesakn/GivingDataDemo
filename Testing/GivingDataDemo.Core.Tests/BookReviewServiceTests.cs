@@ -43,9 +43,12 @@ namespace GivingDataDemo.Core.Tests
             
             Assert.Equal(mockBooks, books);
         }
+        
 
-
-
+        /// <summary>
+        /// Test Helper => Generate a fake book review object
+        /// </summary>
+        /// <returns></returns>
         private BookReview GetFakeBookReview()
         {
             return new BookReview()

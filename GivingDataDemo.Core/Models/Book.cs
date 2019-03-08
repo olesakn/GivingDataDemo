@@ -17,9 +17,9 @@ namespace GivingDataDemo.Core.Models
 
         public IEnumerable<string> Authors { get; set; }
 
-        public string ISBN10 { get; set; }
+        //public string ISBN10 { get; set; }
 
-        public string ISBN13 { get; set; }
+        //public string ISBN13 { get; set; }
 
         public int? PageCount { get; set; }
 

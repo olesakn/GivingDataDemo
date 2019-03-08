@@ -24,9 +24,9 @@ namespace GivingDataDemo.Web.Controllers
         }
 
         [HttpGet]
-        public Task<IEnumerable<BookReview>> Get(string id)
+        public async Task<IEnumerable<BookReview>> Get(string id)
         {
-            return _bookReviewService.GetBookReviewsByBookIdAsync(id);
+            return await _bookReviewService.GetBookReviewsByBookIdAsync(id);
         }
 
         [HttpPut]
